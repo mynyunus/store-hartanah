@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="assets/logo/logo.png" />
+    <title>Semua Listing Hartanah | Store Hartanah</title>
+    <meta
+      name="description"
+      content="Semua listing hartanah Store Hartanah dengan filter lokasi, status dan harga untuk bantu anda cari rumah ikut bajet."
+    />
+    <meta name="robots" content="index,follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="listing-page">
+    <header class="site-header" id="top">
+      <nav class="navbar container" aria-label="Navigasi Utama">
+        <a class="brand" href="index.html#hero" aria-label="Store Hartanah">
+          <span class="brand-mark">Store Hartanah</span>
+          <span class="brand-sub">Nur Rashidah (REN33796)</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Buka menu"
+          data-menu-toggle
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" data-desktop-nav>
+          <li><a href="index.html#about">Tentang</a></li>
+          <li><a href="index.html#services">Servis</a></li>
+          <li><a href="#listing" class="active">Listing</a></li>
+          <li>
+            <a
+              class="btn btn-primary btn-nav"
+              href="https://wa.me/60133459365"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Hubungi Sekarang</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div class="menu-backdrop" data-menu-backdrop></div>
+      <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+        <a href="index.html#hero" data-nav-link>Utama</a>
+        <a href="index.html#about" data-nav-link>Tentang</a>
+        <a href="index.html#services" data-nav-link>Servis</a>
+        <a href="#listing" data-nav-link>Listing</a>
+        <a
+          class="btn btn-primary"
+          href="https://wa.me/60133459365"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Hubungi Mizz Rashidah</a
+        >
+      </div>
+    </header>
+
+    <main class="listing-main" id="listing">
+      <section class="section">
+        <div class="container reveal is-visible">
+          <p class="eyebrow">Semua Listing</p>
+          <h1>Cari listing ikut lokasi, status dan bajet</h1>
+          <p>
+            Gunakan filter di bawah untuk lihat semua pilihan listing aktif Store Hartanah.
+          </p>
+
+          <form class="listing-filter" data-listing-filter>
+            <div class="listing-filter-grid">
+              <label>
+                Lokasi
+                <select data-filter-location>
+                  <option value="">Semua lokasi</option>
+                </select>
+              </label>
+
+              <label>
+                Status Hartanah
+                <select data-filter-status>
+                  <option value="">Semua status</option>
+                </select>
+              </label>
+
+              <label>
+                Harga Min (RM)
+                <input type="number" min="0" step="1000" placeholder="Contoh 100000" data-filter-price-min />
+              </label>
+
+              <label>
+                Harga Max (RM)
+                <input type="number" min="0" step="1000" placeholder="Contoh 500000" data-filter-price-max />
+              </label>
+
+              <label class="listing-search-field">
+                Carian
+                <input
+                  type="search"
+                  placeholder="Cari ikut tajuk, lokasi atau deskripsi"
+                  data-filter-search
+                />
+              </label>
+            </div>
+            <div class="listing-filter-actions">
+              <button class="btn btn-secondary" type="button" data-filter-reset>Reset Filter</button>
+            </div>
+          </form>
+
+          <p class="listing-count" data-listing-count>0 listing dijumpai</p>
+
+          <div class="listing-grid" data-listing-grid data-listing-grid-all></div>
+          <p class="listing-empty" data-listing-empty hidden>
+            Tiada listing sepadan dengan filter semasa. Cuba kosongkan filter atau ubah julat harga.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Store Hartanah</h3>
+          <p>Nur Rashidah Binti Zainuddin (REN33796)</p>
+          <p>Ejen Hartanah Mesra + Profesional</p>
+        </div>
+
+        <div>
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="index.html#hero">Utama</a></li>
+            <li><a href="index.html#services">Servis</a></li>
+            <li><a href="#listing">Listing</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Hubungi</h4>
+          <ul>
+            <li>
+              <a href="https://wa.me/60133459365" target="_blank" rel="noopener noreferrer"
+                >WhatsApp: +60 13-345 9365</a
+              >
+            </li>
+            <li>Berdaftar LPPEH</li>
+            <li>Ditubuhkan sejak 2019</li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <a
+          class="social-pill"
+          href="https://wa.me/60133459365"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Hubungi melalui WhatsApp"
+          ><span>WhatsApp</span></a
+        >
+        <p>&copy; <span id="year"></span> Store Hartanah. Hak cipta terpelihara.</p>
+      </div>
+    </footer>
+
+    <a
+      class="floating-wa"
+      href="https://wa.me/60133459365"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="WhatsApp Store Hartanah"
+      ><span>WhatsApp</span></a
+    >
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

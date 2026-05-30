@@ -1,0 +1,21 @@
+{
+  "name": "store-hartanah",
+  "compatibility_date": "2026-04-15",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./public"
+  },
+  "routes": [
+    {
+      "pattern": "storehartanah.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.storehartanah.com",
+      "custom_domain": true
+    }
+  ],
+  "build": {
+    "command": "rm -rf public && mkdir -p public && cp index.html listing.html styles.css script.js public/ && mkdir -p public/assets && cp -R assets/. public/assets/"
+  }
+}
