@@ -12,6 +12,11 @@ const LISTING_WHATSAPP_BASE = "https://wa.me/60133459365";
 const LISTING_DEFAULT_MESSAGE =
   "Hai Mizz Rashidah, saya berminat untuk dapatkan cadangan rumah ikut bajet saya.";
 
+const previewParam = new URLSearchParams(window.location.search).get("preview");
+if (previewParam === "1" || previewParam === "true") {
+  body.classList.add("is-preview-mode");
+}
+
 const setMenu = (open) => {
   if (!menuToggle || !mobileMenu) return;
   menuToggle.setAttribute("aria-expanded", String(open));

@@ -16,6 +16,6 @@
     }
   ],
   "build": {
-    "command": "rm -rf public && mkdir -p public && cp index.html listing.html styles.css script.js public/ && mkdir -p public/assets && cp -R assets/. public/assets/"
+    "command": "rm -rf public && mkdir -p public && cp index.html listing.html design.html styles.css script.js public/ && mkdir -p public/assets && cp -R assets/. public/assets/"
   }
 }
