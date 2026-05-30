@@ -10,7 +10,7 @@ const LISTING_SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1KUE6Yt0FS0d8revKLuXdcnD_9VEbafewkLcMMzptixc/edit?gid=0#gid=0";
 const LISTING_WHATSAPP_BASE = "https://wa.me/60133459365";
 const LISTING_DEFAULT_MESSAGE =
-  "Hi Mizz Rashidah, saya berminat untuk dapatkan cadangan rumah ikut bajet saya.";
+  "Hai Mizz Rashidah, saya berminat untuk dapatkan cadangan rumah ikut bajet saya.";
 
 const setMenu = (open) => {
   if (!menuToggle || !mobileMenu) return;
@@ -238,11 +238,11 @@ const parsePriceNumber = (priceText) => {
 };
 
 const buildFallbackWhatsappText = (listing) => {
-  const lines = ["Hi Mizz Rashidah, saya berminat dengan listing ini:"];
+  const lines = ["Hai Mizz Rashidah, saya berminat dengan unit ini:"];
   if (listing.title) lines.push(`• ${listing.title}`);
   if (listing.location) lines.push(`• Lokasi: ${listing.location}`);
   if (listing.price) lines.push(`• Harga: ${listing.price}`);
-  lines.push("Boleh saya dapatkan detail penuh?");
+  lines.push("Boleh saya dapatkan butiran penuh?");
   return lines.join("\n");
 };
 
@@ -423,7 +423,7 @@ const renderListingCard = (listing) => {
   action.href = buildWhatsappLink(listing);
   action.target = "_blank";
   action.rel = "noopener noreferrer";
-  action.textContent = "WhatsApp Listing";
+  action.textContent = "Tanya Unit Ini";
   content.appendChild(action);
 
   card.appendChild(media);
@@ -506,7 +506,7 @@ const renderListingGrid = (grid, listings) => {
 const updateListingCount = (count) => {
   const countTarget = document.querySelector("[data-listing-count]");
   if (countTarget) {
-    countTarget.textContent = `${count} listing dijumpai`;
+    countTarget.textContent = `${count} unit dijumpai`;
   }
 };
 

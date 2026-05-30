@@ -1,13 +1,13 @@
 :root {
-  --navy: #0f2747;
-  --navy-soft: #173863;
+  --navy: #0f2d5c;
+  --navy-soft: #173f78;
   --charcoal: #1f2733;
   --text: #324154;
   --white: #ffffff;
   --offwhite: #f5f7fa;
   --line: #dbe2ea;
-  --gold: #b7955f;
-  --gold-soft: #d7bf91;
+  --gold: #c8a45a;
+  --gold-soft: #e1c993;
   --shadow: 0 14px 35px rgba(15, 39, 71, 0.1);
   --radius: 14px;
   --container: 1160px;
@@ -25,7 +25,7 @@ body {
   margin: 0;
   font-family: "Manrope", sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #f9fbfd 0%, #ffffff 240px, #ffffff 100%);
+  background: #ffffff;
   line-height: 1.65;
 }
 
@@ -87,6 +87,20 @@ h1 {
 
 h2 {
   font-size: clamp(1.7rem, 3vw, 2.45rem);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.55rem;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--gold);
 }
 
 h3 {
@@ -104,6 +118,22 @@ p {
   letter-spacing: 0.1em;
   color: var(--navy-soft);
   font-size: 0.75rem;
+}
+
+.center-heading {
+  display: block;
+  width: fit-content;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.center-heading::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.center-eyebrow {
+  text-align: center;
 }
 
 .lead {
@@ -139,13 +169,21 @@ p {
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  background: var(--navy-soft);
+  background: var(--gold);
+  color: #182739;
 }
 
 .btn-secondary {
   border-color: var(--line);
   color: var(--charcoal);
   background: var(--white);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  border-color: var(--gold);
+  color: var(--navy);
+  background: #fffaf0;
 }
 
 .btn-gold {
@@ -176,20 +214,22 @@ p {
 }
 
 .brand {
-  display: grid;
-  gap: 0.1rem;
+  display: flex;
+  align-items: center;
+  width: 240px;
+  min-width: 240px;
 }
 
-.brand-mark {
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  font-size: 1.28rem;
-  color: var(--navy);
-}
-
-.brand-sub {
-  font-size: 0.76rem;
-  color: #62758d;
+.brand-logo {
+  display: block;
+  width: auto;
+  height: 42px;
+  max-width: none;
+  object-fit: contain;
+  aspect-ratio: auto;
+  border-radius: 0;
+  transform: scale(3.2);
+  transform-origin: left center;
 }
 
 .nav-links {
@@ -206,6 +246,15 @@ p {
   border-radius: 999px;
   font-size: 0.92rem;
   color: #405267;
+}
+
+.nav-links .btn-nav {
+  color: #ffffff;
+}
+
+.nav-links .btn-nav:hover,
+.nav-links .btn-nav:focus-visible {
+  color: #182739;
 }
 
 .nav-links a:not(.btn):hover,
@@ -305,6 +354,37 @@ p {
   padding-top: clamp(3rem, 7vw, 6rem);
 }
 
+.hero-copy {
+  background: linear-gradient(155deg, #fffaf0 0%, #f7ecd6 100%);
+  border: 1px solid #e4cd9c;
+  border-radius: 18px;
+  padding: clamp(1.1rem, 2.4vw, 1.8rem);
+  box-shadow: 0 16px 34px rgba(15, 45, 92, 0.12);
+  text-align: center;
+}
+
+.hero-copy .eyebrow {
+  color: #7a5a1f;
+}
+
+.hero-copy h1 {
+  color: var(--navy);
+}
+
+.hero-copy .lead {
+  color: #2f4866;
+}
+
+.hero-copy .hero-trust span {
+  background: #fffdf8;
+  border: 1px solid #e7d1a3;
+  color: #5f7086;
+}
+
+.hero-copy .hero-trust .trust-badge {
+  border-color: #cfab62;
+}
+
 .hero-media {
   margin: 0;
   display: flex;
@@ -329,12 +409,20 @@ p {
   margin-top: 1.45rem;
 }
 
+.hero-copy .hero-actions {
+  justify-content: center;
+}
+
 .hero-trust {
-  margin-top: 1.45rem;
+  margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.45rem;
-  width: min(100%, 420px);
+  gap: 0.35rem;
+  width: min(100%, 360px);
+}
+
+.hero-copy .hero-trust {
+  margin-inline: auto;
 }
 
 .hero-trust span {
@@ -342,13 +430,20 @@ p {
   align-items: center;
   justify-content: center;
   background: #eff4fa;
-  color: #51657c;
-  border-radius: 12px;
-  padding: 0.42rem 0.5rem;
-  min-height: 42px;
+  color: #5b6d82;
+  border-radius: 10px;
+  padding: 0.32rem 0.44rem;
+  min-height: 34px;
   text-align: center;
-  line-height: 1.2;
-  font-size: clamp(0.7rem, 1.9vw, 0.83rem);
+  line-height: 1.15;
+  font-size: clamp(0.66rem, 1.6vw, 0.75rem);
+}
+
+.hero-trust .trust-badge {
+  background: linear-gradient(145deg, #dbc187 0%, var(--gold) 100%);
+  color: #1f2f46;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .card,
@@ -376,6 +471,32 @@ p {
   margin-top: 1.35rem;
 }
 
+.testimoni-grid {
+  align-items: stretch;
+}
+
+.testimoni-grid .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.testimoni-grid blockquote {
+  margin: 0;
+}
+
+.testimoni-grid blockquote p {
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.testimoni-grid blockquote cite {
+  margin-top: auto;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--navy);
+}
+
 .check-list,
 .areas-list {
   list-style: none;
@@ -387,8 +508,21 @@ p {
 
 .check-list li,
 .areas-list li {
+  position: relative;
   border-left: 2px solid var(--gold-soft);
-  padding-left: 0.7rem;
+  padding-left: 1rem;
+}
+
+.check-list li::before,
+.areas-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.34rem;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--gold);
 }
 
 .about-owner-img {
@@ -551,6 +685,22 @@ p {
   color: #4c6076;
 }
 
+.listing-meta span {
+  position: relative;
+  padding-left: 0.95rem;
+}
+
+.listing-meta span::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--gold);
+}
+
 .listing-price {
   font-weight: 700;
   color: #102947;
@@ -699,7 +849,7 @@ p {
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--navy);
+  color: var(--gold);
   font-size: 1.2rem;
 }
 
@@ -903,13 +1053,33 @@ p {
     text-align: center;
   }
 
-  .hero-actions,
+  .section h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .hero-trust {
     justify-content: center;
   }
 
+  .hero-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 42px;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
   .hero-trust {
-    width: min(100%, 460px);
+    width: min(100%, 390px);
   }
 
   .split > div,
@@ -919,6 +1089,16 @@ p {
 
   .hero-media img {
     max-height: 420px;
+  }
+
+  .brand-logo {
+    height: 36px;
+    transform: scale(3.2);
+  }
+
+  .brand {
+    width: 190px;
+    min-width: 190px;
   }
 }
 
