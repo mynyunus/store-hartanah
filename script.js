@@ -715,20 +715,24 @@ const initImageCarousel = ({
   carousel.appendChild(viewport);
   carousel.appendChild(nextButton);
 
-  const dots = document.createElement("div");
-  dots.className = "testimonial-dots";
+  const indicator = document.createElement("div");
+  indicator.className = "testimonial-indicator";
 
-  const dotButtons = imageSources.map((_, idx) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "testimonial-dot";
-    button.setAttribute("aria-label", `Pergi ke gambar ${idx + 1}`);
-    dots.appendChild(button);
-    return button;
-  });
+  const indicatorText = document.createElement("span");
+  indicatorText.className = "testimonial-indicator-text";
+
+  const indicatorBar = document.createElement("div");
+  indicatorBar.className = "testimonial-indicator-bar";
+
+  const indicatorFill = document.createElement("span");
+  indicatorFill.className = "testimonial-indicator-fill";
+  indicatorBar.appendChild(indicatorFill);
+
+  indicator.appendChild(indicatorText);
+  indicator.appendChild(indicatorBar);
 
   root.appendChild(carousel);
-  root.appendChild(dots);
+  root.appendChild(indicator);
 
   const lightbox = document.querySelector(lightboxSelector);
   const lightboxImage = document.querySelector(lightboxImageSelector);
@@ -745,9 +749,8 @@ const initImageCarousel = ({
     const total = imageSources.length;
     activeIndex = (index + total) % total;
     track.style.transform = `translateX(-${activeIndex * 100}%)`;
-    dotButtons.forEach((dot, dotIndex) => {
-      dot.classList.toggle("is-active", dotIndex === activeIndex);
-    });
+    indicatorText.textContent = `${activeIndex + 1} / ${total}`;
+    indicatorFill.style.width = `${((activeIndex + 1) / total) * 100}%`;
   };
 
   const updateLightbox = () => {
@@ -774,9 +777,6 @@ const initImageCarousel = ({
 
   prevButton.addEventListener("click", () => goTo(activeIndex - 1));
   nextButton.addEventListener("click", () => goTo(activeIndex + 1));
-  dotButtons.forEach((dot, index) => {
-    dot.addEventListener("click", () => goTo(index));
-  });
 
   track.addEventListener("click", (event) => {
     const image = event.target.closest("img[data-testimonial-index]");
