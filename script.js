@@ -12,11 +12,6 @@ const LISTING_WHATSAPP_BASE = "https://wa.me/60133459365";
 const LISTING_DEFAULT_MESSAGE =
   "Hai Mizz Rashidah, saya berminat untuk dapatkan cadangan rumah ikut bajet saya.";
 
-const previewParam = new URLSearchParams(window.location.search).get("preview");
-if (previewParam === "1" || previewParam === "true") {
-  body.classList.add("is-preview-mode");
-}
-
 const setMenu = (open) => {
   if (!menuToggle || !mobileMenu) return;
   menuToggle.setAttribute("aria-expanded", String(open));
@@ -565,6 +560,319 @@ const setupGalleryControls = () => {
   });
 };
 
+const TESTIMONIAL_IMAGE_NAMES = [
+  "WhatsApp Image 2026-06-02 at 12.40.58 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.40.58 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.40.59 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.40.59 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.40.59 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.00 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.00 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.01 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.01 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.02 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.02 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.02 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.03 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.03 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.04 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.04 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.41.04 AM.jpeg",
+];
+
+const SOLD_IMAGE_NAMES = [
+  "WhatsApp Image 2026-06-02 at 12.42.02 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.02 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.02 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.03 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.03 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.04 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.04 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.04 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.05 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.05 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.05 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.06 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.06 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.07 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.07 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.07 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.08 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.08 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.08 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.09 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.09 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.10 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.10 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.10 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.11 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.12 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.12 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.12 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.13 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.13 AM (2).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.13 AM.jpeg",
+];
+
+const bindSwipeNavigation = (element, onPrev, onNext) => {
+  if (!element) return;
+  let startX = 0;
+  let startY = 0;
+  let active = false;
+
+  element.addEventListener(
+    "touchstart",
+    (event) => {
+      const touch = event.changedTouches?.[0];
+      if (!touch) return;
+      startX = touch.clientX;
+      startY = touch.clientY;
+      active = true;
+    },
+    { passive: true }
+  );
+
+  element.addEventListener(
+    "touchend",
+    (event) => {
+      if (!active) return;
+      const touch = event.changedTouches?.[0];
+      if (!touch) return;
+
+      const deltaX = touch.clientX - startX;
+      const deltaY = touch.clientY - startY;
+      active = false;
+
+      if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+      if (deltaX < 0) onNext();
+      else onPrev();
+    },
+    { passive: true }
+  );
+};
+
+const initImageCarousel = ({
+  rootSelector,
+  imageBasePath,
+  imageNames,
+  imageAltPrefix,
+  lightboxSelector,
+  lightboxImageSelector,
+  lightboxCountSelector,
+  lightboxStageSelector,
+  lightboxPrevSelector,
+  lightboxNextSelector,
+}) => {
+  const root = document.querySelector(rootSelector);
+  if (!root) return;
+
+  const imageSources = imageNames.map((name) => `${imageBasePath}/${encodeURIComponent(name)}`);
+  if (!imageSources.length) return;
+
+  const carousel = document.createElement("div");
+  carousel.className = "testimonial-carousel";
+
+  const prevButton = document.createElement("button");
+  prevButton.type = "button";
+  prevButton.className = "testimonial-nav prev";
+  prevButton.setAttribute("aria-label", "Gambar sebelumnya");
+  prevButton.textContent = "‹";
+
+  const nextButton = document.createElement("button");
+  nextButton.type = "button";
+  nextButton.className = "testimonial-nav next";
+  nextButton.setAttribute("aria-label", "Gambar seterusnya");
+  nextButton.textContent = "›";
+
+  const viewport = document.createElement("div");
+  viewport.className = "testimonial-viewport";
+
+  const track = document.createElement("div");
+  track.className = "testimonial-track";
+
+  imageSources.forEach((src, idx) => {
+    const slide = document.createElement("figure");
+    slide.className = "testimonial-slide";
+
+    const frame = document.createElement("div");
+    frame.className = "testimonial-frame";
+
+    const image = document.createElement("img");
+    image.src = src;
+    image.alt = `${imageAltPrefix} ${idx + 1}`;
+    image.loading = idx === 0 ? "eager" : "lazy";
+    image.decoding = "async";
+    image.dataset.testimonialIndex = String(idx);
+    image.tabIndex = 0;
+
+    frame.appendChild(image);
+    slide.appendChild(frame);
+    track.appendChild(slide);
+  });
+
+  viewport.appendChild(track);
+  carousel.appendChild(prevButton);
+  carousel.appendChild(viewport);
+  carousel.appendChild(nextButton);
+
+  const dots = document.createElement("div");
+  dots.className = "testimonial-dots";
+
+  const dotButtons = imageSources.map((_, idx) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "testimonial-dot";
+    button.setAttribute("aria-label", `Pergi ke gambar ${idx + 1}`);
+    dots.appendChild(button);
+    return button;
+  });
+
+  root.appendChild(carousel);
+  root.appendChild(dots);
+
+  const lightbox = document.querySelector(lightboxSelector);
+  const lightboxImage = document.querySelector(lightboxImageSelector);
+  const lightboxCount = document.querySelector(lightboxCountSelector);
+  const lightboxStage = document.querySelector(lightboxStageSelector);
+  const lightboxPrev = document.querySelector(lightboxPrevSelector);
+  const lightboxNext = document.querySelector(lightboxNextSelector);
+  const lightboxClose = lightbox?.querySelector(".testimonial-lightbox-close");
+
+  let activeIndex = 0;
+  let lightboxIndex = 0;
+
+  const goTo = (index) => {
+    const total = imageSources.length;
+    activeIndex = (index + total) % total;
+    track.style.transform = `translateX(-${activeIndex * 100}%)`;
+    dotButtons.forEach((dot, dotIndex) => {
+      dot.classList.toggle("is-active", dotIndex === activeIndex);
+    });
+  };
+
+  const updateLightbox = () => {
+    if (!lightbox || !lightboxImage || !lightboxCount) return;
+    const total = imageSources.length;
+    lightboxIndex = (lightboxIndex + total) % total;
+    lightboxImage.src = imageSources[lightboxIndex];
+    lightboxCount.textContent = `${lightboxIndex + 1} / ${total}`;
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    body.classList.remove("lightbox-open");
+  };
+
+  const openLightbox = (index) => {
+    if (!lightbox) return;
+    lightboxIndex = index;
+    updateLightbox();
+    lightbox.hidden = false;
+    body.classList.add("lightbox-open");
+  };
+
+  prevButton.addEventListener("click", () => goTo(activeIndex - 1));
+  nextButton.addEventListener("click", () => goTo(activeIndex + 1));
+  dotButtons.forEach((dot, index) => {
+    dot.addEventListener("click", () => goTo(index));
+  });
+
+  track.addEventListener("click", (event) => {
+    const image = event.target.closest("img[data-testimonial-index]");
+    if (!image) return;
+    openLightbox(Number(image.dataset.testimonialIndex || 0));
+  });
+
+  track.addEventListener("keydown", (event) => {
+    const image = event.target.closest("img[data-testimonial-index]");
+    if (!image) return;
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    openLightbox(Number(image.dataset.testimonialIndex || 0));
+  });
+
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener("click", () => {
+      lightboxIndex -= 1;
+      updateLightbox();
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener("click", () => {
+      lightboxIndex += 1;
+      updateLightbox();
+    });
+  }
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener("click", closeLightbox);
+  }
+
+  if (lightbox) {
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (!lightbox || lightbox.hidden) return;
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") {
+      lightboxIndex -= 1;
+      updateLightbox();
+    }
+    if (event.key === "ArrowRight") {
+      lightboxIndex += 1;
+      updateLightbox();
+    }
+  });
+
+  bindSwipeNavigation(viewport, () => goTo(activeIndex - 1), () => goTo(activeIndex + 1));
+  bindSwipeNavigation(
+    lightboxStage,
+    () => {
+      lightboxIndex -= 1;
+      updateLightbox();
+    },
+    () => {
+      lightboxIndex += 1;
+      updateLightbox();
+    }
+  );
+
+  goTo(0);
+};
+
+const initTestimonialCarousel = () =>
+  initImageCarousel({
+    rootSelector: "[data-testimonial-carousel-root]",
+    imageBasePath: "assets/testimoni",
+    imageNames: TESTIMONIAL_IMAGE_NAMES,
+    imageAltPrefix: "Gambar testimoni pelanggan",
+    lightboxSelector: "[data-testimonial-lightbox]",
+    lightboxImageSelector: "[data-testimonial-lightbox-image]",
+    lightboxCountSelector: "[data-testimonial-lightbox-count]",
+    lightboxStageSelector: "[data-testimonial-lightbox-stage]",
+    lightboxPrevSelector: "[data-testimonial-lightbox-prev]",
+    lightboxNextSelector: "[data-testimonial-lightbox-next]",
+  });
+
+const initSoldCarousel = () =>
+  initImageCarousel({
+    rootSelector: "[data-sold-carousel-root]",
+    imageBasePath: "assets/sold",
+    imageNames: SOLD_IMAGE_NAMES,
+    imageAltPrefix: "Gambar rekod jualan Store Hartanah",
+    lightboxSelector: "[data-sold-lightbox]",
+    lightboxImageSelector: "[data-sold-lightbox-image]",
+    lightboxCountSelector: "[data-sold-lightbox-count]",
+    lightboxStageSelector: "[data-sold-lightbox-stage]",
+    lightboxPrevSelector: "[data-sold-lightbox-prev]",
+    lightboxNextSelector: "[data-sold-lightbox-next]",
+  });
+
 const initListings = async () => {
   const grids = document.querySelectorAll("[data-listing-grid]");
   if (!grids.length) return;
@@ -583,4 +891,6 @@ const initListings = async () => {
 };
 
 setupGalleryControls();
+initTestimonialCarousel();
+initSoldCarousel();
 initListings();
