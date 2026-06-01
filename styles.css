@@ -1395,10 +1395,11 @@ p {
   width: 100%;
   border: 0;
   background: var(--white);
-  padding: 1rem;
+  padding: 1rem 3rem 1rem 1rem;
   text-align: left;
   font-weight: 600;
   color: var(--charcoal);
+  line-height: 1.45;
   cursor: pointer;
   position: relative;
 }
@@ -1407,10 +1408,10 @@ p {
   content: "+";
   position: absolute;
   right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 1.05rem;
   color: var(--gold);
   font-size: 1.2rem;
+  line-height: 1;
 }
 
 .faq-question[aria-expanded="true"]::after {
@@ -1735,6 +1736,16 @@ p {
 
   .services-modern .service-link {
     font-size: 0.66rem;
+  }
+
+  .faq-question {
+    padding: 0.92rem 2.7rem 0.92rem 0.9rem;
+  }
+
+  .faq-question::after {
+    right: 0.86rem;
+    top: 0.98rem;
+    font-size: 1.1rem;
   }
 
   .testimonial-nav {
