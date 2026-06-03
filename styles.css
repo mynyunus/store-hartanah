@@ -1351,6 +1351,26 @@ p {
   justify-content: center;
 }
 
+.listing-more-btn {
+  border-color: rgba(200, 164, 90, 0.72);
+  background: #ffffff;
+  color: var(--navy);
+  box-shadow: 0 10px 20px rgba(15, 45, 92, 0.08);
+  gap: 0.45rem;
+}
+
+.listing-more-btn .material-symbols-outlined {
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.listing-more-btn:hover,
+.listing-more-btn:focus-visible {
+  border-color: var(--gold);
+  background: #fffdf8;
+  color: var(--navy);
+}
+
 .listing-empty {
   margin-top: 1rem;
   padding: 0.95rem 1rem;
