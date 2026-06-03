@@ -1778,22 +1778,18 @@ p {
 }
 
 @media (max-width: 979px) {
+  .section {
+    padding-top: 3.2rem;
+    padding-bottom: 3.2rem;
+  }
+
   .hero {
-    padding-bottom: 1.4rem;
+    padding-top: 3.4rem;
+    padding-bottom: 2.1rem;
   }
 
   .about.section {
-    padding-top: 1.6rem;
-  }
-
-  .services.section {
-    padding-top: 2.5rem;
-    padding-bottom: 2.8rem;
-  }
-
-  .cta.section {
     padding-top: 2.4rem;
-    padding-bottom: 2.8rem;
   }
 
   .hero-copy,
