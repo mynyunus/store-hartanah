@@ -739,12 +739,19 @@ p {
   border: 1px solid rgba(200, 164, 90, 0.28);
 }
 
+.problem-row-head h3 {
+  background: linear-gradient(140deg, #16345f 0%, #10315a 52%, #0f2d5c 100%);
+  color: #ffffff;
+  border-color: rgba(200, 164, 90, 0.24);
+}
+
 .problem-row-sub p {
   min-height: 54px;
   padding-top: 0.66rem;
   padding-bottom: 0.66rem;
-  background: linear-gradient(140deg, #24384d 0%, #1f3146 56%, #16385f 100%);
-  border-color: rgba(200, 164, 90, 0.18);
+  background: linear-gradient(145deg, #fffdf8 0%, #f6efe3 100%);
+  color: #43566c;
+  border-color: rgba(200, 164, 90, 0.26);
 }
 
 .problem-item:hover .problem-row h3,
