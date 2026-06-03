@@ -237,14 +237,24 @@ p {
   max-width: 240px;
 }
 
-.brand-logo {
-  display: block;
-  width: auto;
-  height: 66px;
-  max-width: 100%;
-  object-fit: contain;
-  aspect-ratio: auto;
-  border-radius: 0;
+.brand-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.28rem;
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.brand-store {
+  color: var(--navy);
+}
+
+.brand-hartanah {
+  color: #b88b3d;
 }
 
 .nav-links {
@@ -1993,8 +2003,8 @@ p {
     max-height: 420px;
   }
 
-  .brand-logo {
-    height: 64px;
+  .brand-wordmark {
+    font-size: 1.95rem;
   }
 
   .brand {
