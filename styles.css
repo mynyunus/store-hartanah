@@ -1507,20 +1507,33 @@ p {
 }
 
 .cta-panel {
-  background: linear-gradient(145deg, #0f2747 0%, #173863 100%);
-  color: #e9eef5;
+  background: #f9f5eb;
+  color: #44576d;
+  border: 1px solid rgba(200, 164, 90, 0.28);
+  box-shadow: 0 16px 34px rgba(15, 45, 92, 0.08);
   border-radius: 18px;
   padding: clamp(1.5rem, 4vw, 3rem);
   text-align: center;
 }
 
 .cta-panel h2 {
-  color: var(--white);
+  color: var(--navy);
 }
 
 .cta-panel h2::after {
   left: 50%;
   transform: translateX(-50%);
+}
+
+.cta-panel .btn-gold {
+  background: var(--navy);
+  color: #ffffff;
+}
+
+.cta-panel .btn-gold:hover,
+.cta-panel .btn-gold:focus-visible {
+  background: #163863;
+  color: #ffffff;
 }
 
 .cta-panel .eyebrow {
@@ -1783,17 +1796,17 @@ p {
 
 @media (max-width: 979px) {
   .section {
-    padding-top: 3.2rem;
-    padding-bottom: 3.2rem;
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
   }
 
   .hero {
     padding-top: 3.4rem;
-    padding-bottom: 2.1rem;
+    padding-bottom: 1.1rem;
   }
 
   .about.section {
-    padding-top: 2.4rem;
+    padding-top: 1.35rem;
   }
 
   .hero-copy,
