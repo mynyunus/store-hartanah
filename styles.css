@@ -399,6 +399,10 @@ p {
   color: var(--navy);
 }
 
+.hero-highlight {
+  color: #b88b3d;
+}
+
 .hero-copy .lead {
   color: #2f4866;
 }
