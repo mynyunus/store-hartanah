@@ -1613,12 +1613,12 @@ p {
   gap: 0.45rem;
 }
 
-.footer-contact-label {
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #9fb0c3;
+.footer-contact-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  border-radius: 0;
+  flex: 0 0 auto;
 }
 
 .footer-badges {
