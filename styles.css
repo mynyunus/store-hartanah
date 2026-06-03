@@ -240,7 +240,7 @@ p {
 .brand-logo {
   display: block;
   width: auto;
-  height: 52px;
+  height: 66px;
   max-width: 100%;
   object-fit: contain;
   aspect-ratio: auto;
@@ -373,6 +373,7 @@ p {
 
 .hero {
   padding-top: clamp(3rem, 7vw, 6rem);
+  background: #f9f5eb;
 }
 
 .hero-copy {
@@ -1767,6 +1768,14 @@ p {
 }
 
 @media (max-width: 979px) {
+  .hero {
+    padding-bottom: 1.4rem;
+  }
+
+  .about.section {
+    padding-top: 1.6rem;
+  }
+
   .hero-copy,
   .hero-copy p,
   .section h2,
@@ -1950,7 +1959,7 @@ p {
   }
 
   .brand-logo {
-    height: 42px;
+    height: 64px;
   }
 
   .brand {
