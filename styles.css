@@ -365,16 +365,18 @@ p {
   align-items: center;
 }
 
+.hero-grid {
+  grid-template-columns: 1fr;
+  max-width: 880px;
+  justify-content: center;
+}
+
 .hero {
   padding-top: clamp(3rem, 7vw, 6rem);
 }
 
 .hero-copy {
-  background: linear-gradient(155deg, #fffaf0 0%, #f7ecd6 100%);
-  border: 1px solid #e4cd9c;
-  border-radius: 18px;
-  padding: clamp(1.1rem, 2.4vw, 1.8rem);
-  box-shadow: 0 16px 34px rgba(15, 45, 92, 0.12);
+  padding: 0;
   text-align: center;
 }
 
@@ -420,12 +422,52 @@ p {
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.7rem;
-  margin-top: 1.45rem;
+  gap: 0.95rem;
+  margin-top: 1.55rem;
 }
 
 .hero-copy .hero-actions {
   justify-content: center;
+}
+
+.hero-actions .btn {
+  min-height: 56px;
+  padding: 0.9rem 1.7rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  gap: 0.52rem;
+  box-shadow: 0 12px 24px rgba(15, 45, 92, 0.12);
+}
+
+.hero-actions .btn .material-symbols-outlined {
+  font-size: 1.08rem;
+}
+
+.hero-actions .btn-primary {
+  background: linear-gradient(135deg, #0f2747 0%, #163863 100%);
+  color: #ffffff;
+}
+
+.hero-actions .btn-primary:hover,
+.hero-actions .btn-primary:focus-visible {
+  background: #0f2747;
+  color: #ffffff;
+}
+
+.hero-actions .btn-secondary {
+  border-color: rgba(15, 45, 92, 0.25);
+  color: var(--navy);
+  background: #ffffff;
+}
+
+.hero-actions .btn-secondary:hover,
+.hero-actions .btn-secondary:focus-visible {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #ffffff;
 }
 
 .hero-trust {
@@ -479,7 +521,7 @@ p {
 
 .services-modern .services-grid {
   margin-inline: auto;
-  max-width: 1100px;
+  max-width: 1320px;
   gap: 1.1rem;
 }
 
@@ -578,6 +620,21 @@ p {
 
 .services-modern .service-link-icon {
   font-size: 0.95rem;
+}
+
+.services-modern .service-link-button {
+  min-height: 44px;
+  padding: 0.72rem 1rem;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(15, 39, 71, 0.16);
+}
+
+.services-modern .service-link-button:hover,
+.services-modern .service-link-button:focus-visible {
+  background: #163863;
+  color: #ffffff;
 }
 
 .services-modern .service-arrow {
@@ -1645,6 +1702,11 @@ p {
     gap: 2.2rem;
   }
 
+  .hero-grid {
+    grid-template-columns: 1fr;
+    max-width: 880px;
+  }
+
   .split.reverse > :first-child {
     order: 2;
   }
@@ -1654,7 +1716,6 @@ p {
   }
 
   .usp-grid,
-  .services-grid,
   .testimoni-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1690,6 +1751,10 @@ p {
 
   .nav-links {
     display: flex;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .listing-grid {
@@ -1797,13 +1862,17 @@ p {
 
   .hero-actions .btn {
     width: 100%;
-    min-height: 46px;
-    padding: 0.5rem 0.58rem;
-    font-size: 0.76rem;
+    min-height: 50px;
+    padding: 0.62rem 0.72rem;
+    font-size: 0.65rem;
     line-height: 1.15;
     white-space: normal;
     text-wrap: balance;
     text-align: center;
+  }
+
+  .hero-actions .btn .material-symbols-outlined {
+    font-size: 0.94rem;
   }
 
   .hero-trust {

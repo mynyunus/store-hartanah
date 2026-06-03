@@ -614,6 +614,80 @@ const SOLD_IMAGE_NAMES = [
   "WhatsApp Image 2026-06-02 at 12.42.13 AM.jpeg",
 ];
 
+const SOLD_IMAGE_PRIORITY = [
+  "WhatsApp Image 2026-06-02 at 12.42.03 AM (1).jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.03 AM.jpeg",
+  "WhatsApp Image 2026-06-02 at 12.42.02 AM.jpeg",
+];
+
+const parseDatedImageName = (name) => {
+  const match = name.match(
+    /(\d{4})-(\d{2})-(\d{2}) at (\d{1,2})\.(\d{2})\.(\d{2}) (AM|PM)(?: \((\d+)\))?/i
+  );
+
+  if (!match) {
+    return {
+      timestamp: Number.MIN_SAFE_INTEGER,
+      variant: Number.MAX_SAFE_INTEGER,
+    };
+  }
+
+  const [, year, month, day, hourText, minute, second, meridiem, variantText] = match;
+  let hour = Number(hourText);
+  const upperMeridiem = meridiem.toUpperCase();
+
+  if (upperMeridiem === "AM" && hour === 12) hour = 0;
+  if (upperMeridiem === "PM" && hour !== 12) hour += 12;
+
+  return {
+    timestamp: new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      hour,
+      Number(minute),
+      Number(second)
+    ).getTime(),
+    variant: variantText ? Number(variantText) : 0,
+  };
+};
+
+const sortImageNamesByDate = (names) =>
+  [...names].sort((left, right) => {
+    const leftParsed = parseDatedImageName(left);
+    const rightParsed = parseDatedImageName(right);
+
+    if (leftParsed.timestamp !== rightParsed.timestamp) {
+      return rightParsed.timestamp - leftParsed.timestamp;
+    }
+
+    if (leftParsed.variant !== rightParsed.variant) {
+      return leftParsed.variant - rightParsed.variant;
+    }
+
+    return left.localeCompare(right, undefined, { numeric: true, sensitivity: "base" });
+  });
+
+const sortSoldImageNames = (names) => {
+  const sourceOrder = new Map(names.map((name, index) => [name, index]));
+  const priorityOrder = new Map(SOLD_IMAGE_PRIORITY.map((name, index) => [name, index]));
+
+  return [...names].sort((left, right) => {
+    const leftPriority = priorityOrder.get(left);
+    const rightPriority = priorityOrder.get(right);
+
+    if (leftPriority !== undefined && rightPriority !== undefined) {
+      return leftPriority - rightPriority;
+    }
+
+    if (leftPriority !== undefined) return -1;
+    if (rightPriority !== undefined) return 1;
+
+    return (sourceOrder.get(left) ?? Number.MAX_SAFE_INTEGER) -
+      (sourceOrder.get(right) ?? Number.MAX_SAFE_INTEGER);
+  });
+};
+
 const bindSwipeNavigation = (element, onPrev, onNext) => {
   if (!element) return;
   let startX = 0;
@@ -655,6 +729,7 @@ const initImageCarousel = ({
   rootSelector,
   imageBasePath,
   imageNames,
+  sortNames = sortImageNamesByDate,
   imageAltPrefix,
   lightboxSelector,
   lightboxImageSelector,
@@ -666,7 +741,7 @@ const initImageCarousel = ({
   const root = document.querySelector(rootSelector);
   if (!root) return;
 
-  const imageSources = imageNames.map((name) => `${imageBasePath}/${encodeURIComponent(name)}`);
+  const imageSources = sortNames(imageNames).map((name) => `${imageBasePath}/${encodeURIComponent(name)}`);
   if (!imageSources.length) return;
 
   const carousel = document.createElement("div");
@@ -864,6 +939,7 @@ const initSoldCarousel = () =>
     rootSelector: "[data-sold-carousel-root]",
     imageBasePath: "assets/sold",
     imageNames: SOLD_IMAGE_NAMES,
+    sortNames: sortSoldImageNames,
     imageAltPrefix: "Gambar rekod jualan Store Hartanah",
     lightboxSelector: "[data-sold-lightbox]",
     lightboxImageSelector: "[data-sold-lightbox-image]",
