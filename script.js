@@ -396,13 +396,6 @@ const renderListingCard = (listing) => {
   title.textContent = listing.title;
   content.appendChild(title);
 
-  if (listing.description) {
-    const description = document.createElement("p");
-    description.className = "listing-description";
-    description.textContent = listing.description;
-    content.appendChild(description);
-  }
-
   const meta = document.createElement("div");
   meta.className = "listing-meta";
   if (listing.location) {
@@ -417,6 +410,13 @@ const renderListingCard = (listing) => {
     meta.appendChild(price);
   }
   if (meta.children.length) content.appendChild(meta);
+
+  if (listing.description) {
+    const description = document.createElement("p");
+    description.className = "listing-description";
+    description.textContent = listing.description;
+    content.appendChild(description);
+  }
 
   const action = document.createElement("a");
   action.className = "btn btn-primary";
